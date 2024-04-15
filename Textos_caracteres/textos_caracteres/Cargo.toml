@@ -1,0 +1,13 @@
+[package]
+name = "textos_caracteres"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[profile.release]
+strip = true # Automatically strip symbols from the binary
+opt-level = "z" # Optimize for size
+lto = true # Enable LTO
+# codegen-units = 1 # Use a single codegen for size optimization
+panic = "abort" # Remove traceback information

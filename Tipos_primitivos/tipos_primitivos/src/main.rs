@@ -58,7 +58,7 @@ fn main() {
     println!("{:?}", numbers.0);
     println!("{:?}", numbers.1);
     println!("{:?}", numbers.2);
-    
+
     numbers.0 = 200;
     let (a, b, c) = numbers; //desestruturação da tupla
     println!("{a}, {b}, {c}");
@@ -71,12 +71,18 @@ fn main() {
     // e quantos espaços ele irá ter. O rust sabe a quantidade de elementos que possui dentro de um
     // array. Se tentar acessar elementos que não estão nos limites do array, o rust em tempo de
     // compilação dará um erro "out of bound".;
-    let mut numbers: [i32;4] = [1, 2, 3, 4];
+    let mut numbers: [i32; 4] = [1, 2, 3, 4];
     println!("{:#?}", numbers); // variable shadowing
-    println!("{:?}", numbers[0]); 
+    println!("{:?}", numbers[0]);
     numbers[1] = 50;
     println!("{:?}", numbers);
 
     // slice
-    println!("{:?}, {:?}, {:?}, {:?}", &numbers[0..3], &numbers[0..=3], &numbers[0..4], &numbers[..=3]);
+    println!(
+        "{:?}, {:?}, {:?}, {:?}",
+        &numbers[0..3],
+        &numbers[0..=3],
+        &numbers[0..4],
+        &numbers[..=3]
+    );
 }
