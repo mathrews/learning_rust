@@ -94,9 +94,14 @@ fn leitura_do_term() {
     let nums: Vec<&str> = s.split(",").map(clean).collect();
     println!("Você digitou {:?}", nums);
 
-    // Maneira 2:
-    let nums: Vec<&str> = s.split(",").map(|c| c.trim()).collect();
-    println!("Você digitou {:?}", nums);
+    // Maneira 2 com conversão de tipos:
+    let nums: Vec<i32> = s
+        .split(",")
+        .map(|c| c.trim().parse().expect("Error"))
+        .collect();
+
+    let result: i32 = nums.iter().sum();
+    println!("O total é {}", result);
 
     println!("{}", "-".repeat(100));
 }
