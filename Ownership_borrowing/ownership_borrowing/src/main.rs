@@ -12,7 +12,7 @@
 // bool, char);
 
 fn main() {
-    let mut a: i32 = 1;
+    let mut a: i32 = 4;
     let b = a;
     // Aqui não é uma referênciação da variável a, e sim uma cópia do valor que está nela
     // que no caso é 1. E devido a isso, a variável b é independente da variável a. Essa
