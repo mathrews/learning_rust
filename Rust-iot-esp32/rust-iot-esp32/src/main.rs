@@ -4,6 +4,7 @@ use esp_idf_svc::{
     nvs::EspDefaultNvsPartition,
     wifi::{ClientConfiguration, Configuration, EspWifi},
 };
+use heapless::String;
 
 fn main() {
     // It is necessary to call this function once. Otherwise some patches to the runtime
@@ -15,6 +16,9 @@ fn main() {
 
     log::info!("Hello, world!");
 
+    let wifi_ssid: String<32> = String::try_from("IFCE NASH 5G").expect("INVALID SSID");
+    let wifi_pass: String<64> = String::try_from("nashifce8556").expect("INVALID PASSWORD");
+
     let nvs = EspDefaultNvsPartition::take().unwrap();
 
     let mut wifi = EspWifi::new(
@@ -25,8 +29,8 @@ fn main() {
     .unwrap();
 
     wifi.set_configuration(&Configuration::Client(ClientConfiguration {
-        ssid: "IFCE NASH 5G".into(),
-        password: "nashifce8556".into(),
+        ssid: wifi_ssid,
+        password: wifi_pass,
         ..Default::default()
     }))
     .unwrap();
