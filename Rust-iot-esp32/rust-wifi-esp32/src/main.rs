@@ -22,8 +22,8 @@ fn main() -> anyhow::Result<()> {
 
     log::info!("Hello, world!");
 
-    let wifi_ssid: String<32> = String::try_from("IFCE NASH 5G").expect("INVALID SSID");
-    let wifi_pass: String<64> = String::try_from("nashifce8556").expect("INVALID PASSWORD");
+    let wifi_ssid: String<32> = String::try_from("").expect("INVALID SSID");
+    let wifi_pass: String<64> = String::try_from("").expect("INVALID PASSWORD");
 
     // Peripherals
     let peripherals = Peripherals::take().unwrap();
