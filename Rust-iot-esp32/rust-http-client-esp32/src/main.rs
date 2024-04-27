@@ -1,9 +1,11 @@
 use anyhow;
-use embedded_svc::http::client::Client;
 use esp_idf_svc::{
     eventloop::EspSystemEventLoop,
     hal::peripherals::Peripherals,
-    http::client::{Configuration as HttpConfig, EspHttpConnection},
+    http::{
+        client::{Configuration as HttpConfig, EspHttpConnection, Request},
+        Method,
+    },
     nvs::EspDefaultNvsPartition,
     wifi::{AuthMethod, BlockingWifi, ClientConfiguration, Configuration, EspWifi},
 };
@@ -67,11 +69,17 @@ fn main() -> anyhow::Result<()> {
     })?;
 
     // Create HTTPS Client
-    let mut httpclient = Client::wrap(httpconnection);
+    let mut http_client = Request::wrap(httpconnection);
 
     // HTTP Request Submission
     // Define URL
     let url = "https://httpbin.org/get";
+
+    let request = http_client.connection().initiate_request(
+        Method::Get,
+        url.as_ref(),
+        &[("accept", "text/plain")],
+    );
 
     Ok(())
 }
