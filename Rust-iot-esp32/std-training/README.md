@@ -1,3 +1,5 @@
+`THIS PROJECT IS A CLONED REPOSITORY!!!! LINK: https://github.com/esp-rs/std-training`
+
 # Embedded Rust Trainings for Espressif
 
 [![CI](https://github.com/esp-rs/std-training/actions/workflows/ci.yml/badge.svg)](https://github.com/esp-rs/std-training/actions/workflows/ci.yml)
