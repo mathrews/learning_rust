@@ -18,28 +18,25 @@ impl Distance for Points {
 }
 
 fn main() {
-    let (x1, y1, x2, y2) = input_line();
-    let points = Points { x1: x1, y1: y1, x2: x2, y2: y2 };
+    let inputs = input_line();
+    let points = Points { x1: inputs[0], y1: inputs[1], x2: inputs[2], y2: inputs[3] };
     println!("{:.4}", points.distance());
 }
 
-fn input_line() -> (f64, f64, f64, f64) {
-    let mut line = String::new();
-    io::stdin().read_line(&mut line).unwrap();
+fn input_line() -> Vec<f64> {
+    let mut inputs = Vec::new();
+    
+    for _ in 0..4 {
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).unwrap();
+        inputs.push(input);
+    }
 
-    let [a, b, c, d]: [String; 4] = <[String; 4]>::try_from(
-        line.split_whitespace()
-            .map(str::to_string)
-            .collect::<Vec<_>>(),
-    )
-    .unwrap_or_default();
+    let mut inputs_conv = Vec::new();
+    for input in inputs {
+        let input_conv = input.trim().parse::<f64>().unwrap_or_default();
+        inputs_conv.push(input_conv);
+    }
 
-    let (x1, y1, x2, y2): (f64, f64, f64, f64) = (
-        a.parse::<f64>().unwrap_or_default(),
-        b.parse::<f64>().unwrap_or_default(),
-        c.parse::<f64>().unwrap_or_default(),
-        d.parse::<f64>().unwrap_or_default(),
-    );
-
-    return (x1, y1, x2, y2);
+    return inputs_conv;
 }
