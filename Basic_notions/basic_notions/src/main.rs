@@ -1,4 +1,4 @@
-use std::f64;
+use std::{f64::consts, usize};
 
 fn main() {
     println!("Hello, world!");
@@ -108,4 +108,34 @@ fn main() {
     let mut i = 10;
     by_ref_mut(&mut i);
     println!("i is {}", i);
+
+    // learning where to find the ropes
+    // ex1: finding math example
+    let pi: f64 = 3.1416;
+    let x = pi / 2.0;
+    let cosine = x.cos();
+    println!("{cosine}");
+
+    // ex2:
+    let x = 2.0 * std::f64::consts::PI;
+    let abs_difference = (x.cos() - 1.0).abs();
+    println!("{abs_difference}");
+    assert!(abs_difference < 1e-10);
+
+    // ex3:
+    let x = 2.0 * consts::PI;
+    let abs_difference = (x.cos() - 1.0).abs();
+    println!("{abs_difference}");
+    assert!(abs_difference < 1e-10);
+    println!();
+
+    // array1
+    let arr = [10, 20, 30, 40];
+    let first = arr[0];
+    println!("first {}", first);
+
+    for (index, item) in arr.iter().enumerate() {
+        println!("[{}] = {}", index, item);
+    }
+    println!("length {}", arr.len());
 }
