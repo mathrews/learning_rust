@@ -1,4 +1,4 @@
-use std::{f64::consts, usize};
+use std::f64::consts;
 
 fn main() {
     println!("Hello, world!");
@@ -138,4 +138,35 @@ fn main() {
         println!("[{}] = {}", index, item);
     }
     println!("length {}", arr.len());
+
+    // slice1
+    fn sum_fn(values: &[i32]) -> i32 {
+        let mut res = 0;
+        for i in 0..values.len() {
+            res += values[i];
+        }
+        res
+    }
+    let arr = [20, 40, 60];
+    let res = sum_fn(&arr);
+    println!("sum {}", res);
+
+    // array3
+    let ints = [1, 2, 3];
+    let floats = [1.0, 2.0, 3.0];
+    let strings = ["hello", "world"];
+    let ints_ints = [[1, 2], [10, 20]];
+    println!("ints {:?}", ints);
+    println!("floats {:?}", floats);
+    println!("strings {:?}", strings);
+    println!("ints_ints {:?}", ints_ints);
+    println!();
+
+    // slice2
+    let ints = [1, 2, 3, 4, 5];
+    let slice1 = &ints[0..2];
+    let slice2 = &ints[1..];
+    println!("ints {:?}", ints);
+    println!("slice1 {:?}", slice1);
+    println!("slice2 {:?}", slice2);
 }
