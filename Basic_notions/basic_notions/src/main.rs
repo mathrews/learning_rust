@@ -169,4 +169,30 @@ fn main() {
     println!("ints {:?}", ints);
     println!("slice1 {:?}", slice1);
     println!("slice2 {:?}", slice2);
+    println!();
+
+    // slice3
+    let ints = [1, 2, 3, 4, 5];
+    let slice = &ints;
+    let first = slice.get(0);
+    let last = slice.get(5);
+
+    println!("first {:?}", first);
+    println!("last {:?}", last);
+    println!();
+
+    println!("first {} {}", first.is_some(), first.is_none());
+    println!("last {} {}", last.is_some(), first.is_none());
+    println!("first value {}", *first.unwrap());
+    println!();
+    
+    let maybe_last = slice.get(4);
+    let last = if maybe_last.is_some() {
+        *maybe_last.unwrap() // deference because the type of inside the some is &i32;
+    } else {
+        -1
+    };
+    println!("{last}");
+
+    let last = *slice.get(5).unwrap_or(&-1);
 }
