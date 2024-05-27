@@ -185,7 +185,7 @@ fn main() {
     println!("last {} {}", last.is_some(), first.is_none());
     println!("first value {}", *first.unwrap());
     println!();
-    
+
     let maybe_last = slice.get(4);
     let last = if maybe_last.is_some() {
         *maybe_last.unwrap() // deference because the type of inside the some is &i32;
@@ -204,7 +204,7 @@ fn main() {
 
     let first = v[0]; // will panic if out-of-range
     let maybe_first = v.get(0);
-    
+
     println!("v is {:?}", v);
     println!("first is {}", first);
     println!("maybe_first is {:?}", maybe_first);
@@ -219,10 +219,90 @@ fn main() {
     v.push(10);
     v.push(20);
     v.push(30);
-    
+
     dump(&v);
 
     let slice = &v[1..];
     println!("slice is {:?}", slice);
+    println!();
+
+    // iter1
+    let mut iter = 0..3;
+    assert_eq!(iter.next(), Some(0));
+    assert_eq!(iter.next(), Some(1));
+    assert_eq!(iter.next(), Some(2));
+    assert_eq!(iter.next(), None);
+    
+    // iter2
+    let arr = [10, 20, 30];
+    for i in arr {
+        println!("{}", i);
+    }
+    println!();
+
+    // iter3
+    let arr = [10, 20, 30];
+    for i in arr.iter() {
+        println!("{}", i);
+    }
+
+    let slice = &arr;
+    for i in slice {
+        println!("{}", i);
+    }
+    println!();
+
+    // sum1
+    let sum: i32 = (0..5).sum();
+    println!("sum was {}", sum);
+
+    let sum: i64 = [10, 20, 30].iter().sum();
+    println!("sum was {}", sum);
+    println!();
+
+    // slice4
+    let ints = [1, 2, 3, 4, 5];
+    let slice = &ints;
+
+    for s in slice.windows(2) {
+        println!("window {:?}", s);
+    }
+    println!();
+    
+    for s in slice.chunks(2) {
+        println!("chunck {:?}", s);
+    }
+    println!();
+
+    // vec3
+    let mut v1 = vec![10, 20, 30, 40];
+    v1.pop();
+
+    let mut v2 = Vec::new();
+    v2.push(10);
+    v2.push(20);
+    v2.push(30);
+
+    assert_eq!(v1, v2);
+
+    v2.extend(0..2);
+    assert_eq!(v2, &[10, 20, 30, 0, 1]);
+    println!();
+
+    // vec4
+    let mut v1 = vec![1, 10, 5, 1, 2, 11, 2, 40];
+    v1.sort();
+    v1.dedup();
+    assert_eq!(v1, &[1, 2, 5, 10, 11, 40]);
+
+    // string1
+    fn dump2(s: &str){
+        println!("str '{}'", s);
+    }
+    let text = "hello dolly"; // uma &str
+    let s = text.to_string(); // uma string alocada
+
+    dump2(text);
+    dump2(&s);
     println!();
 }
