@@ -1,4 +1,5 @@
-use std::f64::consts;
+use core::str;
+use std::{f64::consts, fmt::format, string};
 
 fn main() {
     println!("Hello, world!");
@@ -232,7 +233,7 @@ fn main() {
     assert_eq!(iter.next(), Some(1));
     assert_eq!(iter.next(), Some(2));
     assert_eq!(iter.next(), None);
-    
+
     // iter2
     let arr = [10, 20, 30];
     for i in arr {
@@ -268,7 +269,7 @@ fn main() {
         println!("window {:?}", s);
     }
     println!();
-    
+
     for s in slice.chunks(2) {
         println!("chunck {:?}", s);
     }
@@ -296,7 +297,7 @@ fn main() {
     assert_eq!(v1, &[1, 2, 5, 10, 11, 40]);
 
     // string1
-    fn dump2(s: &str){
+    fn dump2(s: &str) {
         println!("str '{}'", s);
     }
     let text = "hello dolly"; // uma &str
@@ -305,4 +306,74 @@ fn main() {
     dump2(text);
     dump2(&s);
     println!();
+
+    // string5
+    let mut s = String::new();
+    // initially empty!
+    s.push('H');
+    s.push_str("ello");
+    s.push(' ');
+    s += "World!"; // short for `push_str`
+                   // remove the last char;
+    s.pop();
+
+    assert_eq!(s, "Hello World");
+    println!();
+
+    // string6
+    fn array_to_str(arr: &[i32]) -> String {
+        let mut res = '['.to_string();
+        for v in arr {
+            res += &v.to_string();
+            res.push(',');
+        }
+        res.pop();
+        res.push(']');
+        res
+    }
+    let arr = array_to_str(&[10, 20, 30]);
+    let res = format!("hello {}", arr);
+
+    assert_eq!(res, "hello [10,20,30]");
+
+    // string2
+    let text = "static";
+    let string = "dynamic".to_string();
+
+    let text_s = &text[1..];
+    let string_s = &string[2..4];
+
+    println!("slices {:?} {:?}", text_s, string_s);
+    println!();
+
+    // string3
+    let multilingual = "Hi! ¡Hola! привет!";
+    for ch in multilingual.chars() {
+        print!("'{}'", ch);
+    }
+    println!("");
+    println!("len {}", multilingual.len());
+    println!("count {}", multilingual.chars().count());
+
+    let maybe = multilingual.find('п');
+    if maybe.is_some() {
+        let hi = &multilingual[maybe.unwrap()..];
+        println!("Russian hi {}", hi);
+    }
+    // 'H' 'i' '!' ' ' '¡' 'H' 'o' 'l' 'a' '!' ' ' 'п' 'р' 'и' 'в' 'е' 'т' '!'
+    // len 25
+    // count 18
+    // Russian hi привет!
+
+    // string examples
+    let text = "The red fox ant the lazy dog";
+    let _words: Vec<&str> = text.split_whitespace().collect();
+    // ["the", "red", "fox", "and", "the", "lazy", "dog"]
+
+    let mut words = Vec::new();
+    words.extend(text.split_whitespace());
+
+    let _stripped: String = text.chars()
+        .filter(|ch| ! ch.is_whitespace()).collect();
+    // theredfoxandthelazydog
 }
