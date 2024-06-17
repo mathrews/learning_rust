@@ -1,5 +1,5 @@
-use core::str;
-use std::{f64::consts, fmt::format, string};
+use std::str;
+use std::f64::consts;
 
 fn main() {
     println!("Hello, world!");
@@ -376,4 +376,14 @@ fn main() {
     let _stripped: String = text.chars()
         .filter(|ch| ! ch.is_whitespace()).collect();
     // theredfoxandthelazydog
+    println!();
+    
+    // args0
+    for arg in std::env::args() {
+        println!("'{}'", arg);
+    }
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    if args.len() > 1 {
+        println!("{:#?}", args);
+    }
 }
