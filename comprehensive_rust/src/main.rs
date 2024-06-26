@@ -1,4 +1,4 @@
-use comprehensive_rust::fib::fib;
+use comprehensive_rust::{collatz::{collatz_length, collatz_recursive}, fib::fib};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{:-^80}", "Day 1 morning");
@@ -89,7 +89,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for j in 0..=2 {
             elements_searched += 1;
             if s[i][j] == target_value {
-                break 'outer; 
+                break 'outer;
             }
         }
     }
@@ -119,6 +119,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Functions:
     println!("gcd: {}", gcd(143, 52));
+
+    // Macros
+    fn factorial(n: u32) -> u32 {
+        let mut product = 1;
+        for i in 1..=n {
+            product *= dbg!(i);
+        }
+        product
+    }
+
+    fn fizzbuzz(n: u32) -> u32 {
+        todo!()
+    }
+    let n = 4;
+    println!("{n}! = {}", factorial(n));
+    println!();
+
+    // collatz
+    println!("{}", collatz_length(5)); 
 
     Ok(())
 }
