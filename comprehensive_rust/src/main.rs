@@ -138,8 +138,39 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // collatz
     println!("{}", collatz_length(5)); 
+    println!();
+
+    // Tuples and Arrays:
+    let mut a: [i8; 10] = [42; 10];
+    a[5] = 0;
+    println!("a: {a:?}");
+
+    let t: (i8, bool) = (7, true);
+    println!("t.0 = {}", t.0);
+    println!("t.1 = {}", t.1);
+
+    let primes = [2, 3, 5, 7, 11, 13, 17, 19];
+    for prime in primes {
+        for i in 2..prime {
+            assert_ne!(prime % i, 0);
+        }
+    }
+
+    print_tuple((1, 2));
+    print_tuple_patterned((1, 2));
 
     Ok(())
+}
+
+fn print_tuple(tuple: (i32, i32)) {
+    let left = tuple.0;
+    let right = tuple.1;
+    println!("left: {left}, right: {right}");
+}
+
+fn print_tuple_patterned(tuple: (i32, i32)) {
+    let (left, right) = tuple;
+    println!("left: {left}, right: {right}");
 }
 
 fn gcd(a: u32, b: u32) -> u32 {
