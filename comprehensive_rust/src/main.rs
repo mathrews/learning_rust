@@ -1,4 +1,8 @@
-use comprehensive_rust::{collatz::{collatz_length, collatz_recursive}, fib::fib};
+use comprehensive_rust::{
+    collatz::{collatz_length, collatz_recursive},
+    fib::fib,
+    nested_arrays::transpose,
+};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{:-^80}", "Day 1 morning");
@@ -137,7 +141,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!();
 
     // collatz
-    println!("{}", collatz_length(5)); 
+    println!("{}", collatz_length(5));
     println!();
 
     // Tuples and Arrays:
@@ -158,6 +162,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     print_tuple((1, 2));
     print_tuple_patterned((1, 2));
+
+    transpose([
+        [101, 102, 103], //
+        [201, 202, 203],
+        [301, 302, 303],
+    ]);
 
     Ok(())
 }
