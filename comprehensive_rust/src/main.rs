@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use comprehensive_rust::{
     collatz::{collatz_length, collatz_recursive},
     fib::fib,
@@ -168,8 +170,108 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         [201, 202, 203],
         [301, 302, 303],
     ]);
+    println!();
+
+    // Matching Values
+    let input = 'x';
+    match input {
+        'q' => println!("Quitting"),
+        'a' | 's' | 'w' | 'd' => println!("Moving around"),
+        '0'..='9' => println!("Number input"),
+        key if key.is_lowercase() => println!("Lowercase: {key}"),
+        _ => println!("something else"),
+    }
+    println!();
+
+    // Structs
+    let foo = Foo {
+        x: (1, 2),
+        y: 2,
+        z: 40,
+    };
+    match foo {
+        Foo {
+            x: (a, 2),
+            y,
+            z: 20,
+        } => println!("x.0 = {a}, b = 2, y = {y}, z = 20"),
+        Foo { y: 2, x: i, z: 40 } => println!("y = 2, x = {i:?}, z = 40"),
+        Foo { y, .. } => println!("y = {y}, other fields were ignored"),
+    }
+    println!();
+
+    // enums
+    let n = 99;
+    match divide_in_two(n) {
+        Resultado::Okei(half) => println!("{n} divided in two is {half}"),
+        Resultado::Erro(msg) => println!("sorry, an error happened: {msg}"),
+    }
+    println!();
+
+    // for n in 1..=100 {
+    //     let result: Resultado = divide_in_two(n);
+    //     match &result {
+    //         Resultado::Okei(half) => println!("{n} divided in two is {half}"),
+    //         Resultado::Erro(msg) => println!("sorry, an error happened: {msg}"),
+    //     }
+    // }
+    // println!();
+
+    // Let Control Flow:
+    // if let
+    fn sleep_for(secs: f32) {
+        if let Ok(dur) = Duration::try_from_secs_f32(secs) {
+            std::thread::sleep(dur);
+            println!("slept for {:?}", dur);
+        }
+    }
+    sleep_for(-10.0);
+    sleep_for(0.8);
+
+    // let else
+    fn hex_or_die_trying(maybe_string: Option<String>) -> Result<u32, String> {
+        let Some(s) = maybe_string else {
+            return Err(String::from("got None"));
+        };
+
+        let Some(first_byte_char) = s.chars().next() else {
+            return Err(String::from("got empty string"));
+        };
+
+        let Some(digit) = first_byte_char.to_digit(16) else {
+            return Err(String::from("not a hex digit"));
+        };
+
+        return Ok(digit);
+    }
+    println!("result: {:?}", hex_or_die_trying(Some(String::from("bar"))));
+
+    let mut name = String::from("Comprehensive Rust 🦀");
+    while let Some(c) = name.pop() {
+        println!("character: {c}");
+    }
+    println!();
 
     Ok(())
+}
+
+struct Foo {
+    x: (u32, u32),
+    y: u32,
+    z: u32,
+}
+
+enum Resultado {
+    Okei(i32),
+    Erro(String),
+}
+
+fn divide_in_two(n: i32) -> Resultado {
+    if n % 2 == 0 {
+        Resultado::Okei(n / 2)
+    } else {
+        Resultado::Erro(format!("Cannot divide {n} into two equal parts"))
+    }
 }
 
 fn print_tuple(tuple: (i32, i32)) {
